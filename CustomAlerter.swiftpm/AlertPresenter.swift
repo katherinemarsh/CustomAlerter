@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlertPresenter<Content: View>: View {
-    @State private var alert: String?
+    @State private var alert: CustomAlert?
 
     private let content: Content
 
@@ -26,9 +26,8 @@ struct AlertPresenter<Content: View>: View {
                 }
             }
             .overlay {
-                if let alert {
-                    Text(alert)
-                        .background(.red)
+                if alert != nil {
+                    CustomAlertView(alert: $alert)
                         .transition(
                             .scale(scale: 0.85)
                             .combined(with: .opacity)

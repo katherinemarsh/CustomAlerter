@@ -9,22 +9,22 @@ import SwiftUI
 import OSLog
 
 struct PresentedAlertEnvironmentKey: EnvironmentKey {
-    static let defaultValue: String? = nil
+    static let defaultValue: CustomAlert? = nil
 }
 
 private enum SetAlertEnvironmentKey: EnvironmentKey {
-    static var defaultValue: (String?) -> Void = { _ in
+    static var defaultValue: (CustomAlert?) -> Void = { _ in
         Logger().warning("SetAlert action has not been configured on this environment")
     }
 }
 
 extension EnvironmentValues {
-    var setAlert: (String?) -> Void {
+    var setAlert: (CustomAlert?) -> Void {
         get { self[SetAlertEnvironmentKey.self] }
         set { self[SetAlertEnvironmentKey.self] = newValue }
     }
 
-    var presentedAlert: String? {
+    var presentedAlert: CustomAlert? {
         get { self[PresentedAlertEnvironmentKey.self] }
         set { self[PresentedAlertEnvironmentKey.self] = newValue }
     }

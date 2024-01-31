@@ -12,9 +12,8 @@ import SwiftUI
 private struct CustomAlertModifier: ViewModifier {
     @Environment(\.setAlert) private var setAlert
     @Environment(\.presentedAlert) private var presentedAlert
-    @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var alert: String?
+    @Binding var alert: CustomAlert?
 
     func body(content: Content) -> some View {
         content
@@ -44,7 +43,7 @@ private struct CustomAlertModifier: ViewModifier {
 
 extension View {
     func customAlert(
-        _ alert: Binding<String?>
+        _ alert: Binding<CustomAlert?>
     ) -> some View {
         modifier(
             CustomAlertModifier(alert: alert)
