@@ -6,26 +6,15 @@
 //
 
 import SwiftUI
-import OSLog
 
 struct PresentedAlertEnvironmentKey: EnvironmentKey {
-    static let defaultValue: CustomAlert? = nil
-}
-
-private enum SetAlertEnvironmentKey: EnvironmentKey {
-    static var defaultValue: (CustomAlert?) -> Void = { _ in
-        Logger().warning("SetAlert action has not been configured on this environment")
-    }
+    static let defaultValue: Binding<CustomAlert?> = .constant(nil)
 }
 
 extension EnvironmentValues {
-    var setAlert: (CustomAlert?) -> Void {
-        get { self[SetAlertEnvironmentKey.self] }
-        set { self[SetAlertEnvironmentKey.self] = newValue }
-    }
-
-    var presentedAlert: CustomAlert? {
+    var presentedAlert: Binding<CustomAlert?> {
         get { self[PresentedAlertEnvironmentKey.self] }
         set { self[PresentedAlertEnvironmentKey.self] = newValue }
     }
 }
+

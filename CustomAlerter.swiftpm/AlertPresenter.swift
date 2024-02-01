@@ -34,11 +34,6 @@ struct AlertPresenter<Content: View>: View {
                         )
                 }
             }
-            .environment(\.presentedAlert, alert)
-            .environment(\.setAlert) { newValue in
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    alert = newValue
-                }
-            }
+            .environment(\.presentedAlert, $alert)
     }
 }
