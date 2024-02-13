@@ -34,12 +34,12 @@ extension View {
         case .sheet:
             self
                 .sheet(isPresented: isPresented, onDismiss: onDismiss) {
-                    AlertPresenter(content: content)
+                    AlertPresenter(content)
                 }
         case .fullScreenCover:
             self
                 .fullScreenCover(isPresented: isPresented, onDismiss: onDismiss) {
-                    AlertPresenter(content: content)
+                    AlertPresenter(content)
                 }
         }
     }

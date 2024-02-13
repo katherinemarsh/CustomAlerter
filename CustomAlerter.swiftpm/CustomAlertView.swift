@@ -31,9 +31,7 @@ struct CustomAlertView: View {
                     if let secondaryAction = alert.secondaryAction, let secondaryButtonText = alert.secondaryButtonText {
                         Button(secondaryButtonText) {
                             secondaryAction()
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                self.alert = nil
-                            }
+                            dismissAlert()
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -43,9 +41,8 @@ struct CustomAlertView: View {
                             primaryAction()
                         }
 
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            self.alert = nil
-                        }
+                        // Primary button dismisses alert by default
+                        dismissAlert()
                     }
                     .buttonStyle(.borderedProminent)
                 }
@@ -66,15 +63,19 @@ struct CustomAlertView: View {
 
     private var dismissButton: some View {
         Button {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.alert = nil
-            }
+            dismissAlert()
         } label: {
             Label("dismiss", systemImage: "xmark")
                 .labelStyle(.iconOnly)
                 .font(.system(size: 16, weight: .bold))
         }
         .padding([.top, .trailing], 8)
+    }
+
+    private func dismissAlert() {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            self.alert = nil
+        }
     }
 }
 

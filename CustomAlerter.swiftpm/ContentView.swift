@@ -21,6 +21,7 @@ struct ContentView: View {
 
 struct SettingsView: View {
     @State private var alert: CustomAlert?
+    @State private var isPresentingSheet = false
 
     var body: some View {
         NavigationStack {
@@ -40,12 +41,41 @@ struct SettingsView: View {
                 }
 
                 Spacer()
+
+                Button("Tap for Sheet") {
+                    isPresentingSheet.toggle()
+                }
+
+                Spacer()
             }
             .customAlert($alert)
+            .modal(isPresented: $isPresentingSheet) {
+                AlertingSheet()
+            }
             .foregroundStyle(.black)
             .toolbarBackground(Color.white, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .navigationTitle("Settings")
+        }
+    }
+}
+
+
+struct AlertingSheet: View {
+    @State private var errorAlert: CustomAlert?
+
+    var body: some View {
+        NavigationStack {
+            Button("Tap to Alert") {
+                errorAlert = .init(
+                    title: "An Error Occured",
+                    message: "A network called failed in a modal context",
+                    primaryButtonText: "OK"
+                )
+            }
+            .customAlert($errorAlert)
+            .navigationTitle("Alerting Sheet")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

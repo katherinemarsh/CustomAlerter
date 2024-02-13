@@ -10,7 +10,11 @@ import SwiftUI
 struct AlertPresenter<Content: View>: View {
     @State private var alert: CustomAlert?
 
-    @ViewBuilder let content: Content
+    private let content: Content
+
+    init(@ViewBuilder _ content: () -> Content) {
+        self.content = content ()
+    }
 
     var body: some View {
         content
@@ -30,7 +34,8 @@ struct AlertPresenter<Content: View>: View {
                         )
                 }
             }
-            .animation(.easeInOut(duration: 0.3), value: alert)
             .environment(\.presentedAlert, $alert)
+            .animation(.easeInOut(duration: 0.3), value: alert)
+            .interactiveDismissDisabled(alert != nil)
     }
 }
