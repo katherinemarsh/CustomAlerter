@@ -47,12 +47,11 @@ struct CustomAlert: Equatable {
 }
 
 extension CustomAlert {
-    static func genericWithRetry(_ retry: @escaping () -> Void) -> Self {
+    static var generic: CustomAlert {
         .init(
             title: "Uh Oh",
             message: "Something went wrong, try again",
-            primaryButtonText: "Retry",
-            primaryAction: retry
+            primaryButtonText: "OK"
         )
     }
 }

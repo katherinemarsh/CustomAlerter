@@ -79,5 +79,5 @@ struct CustomAlertView: View {
 }
 
 #Preview {
-    CustomAlertView(alert: .constant(.genericWithRetry { }))
+    CustomAlertView(alert: .constant(.generic))
 }

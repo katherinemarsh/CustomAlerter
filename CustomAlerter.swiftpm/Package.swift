@@ -10,7 +10,7 @@ import AppleProductTypes
 let package = Package(
     name: "CustomAlerter",
     platforms: [
-        .iOS("17.0")
+        .iOS("16.0")
     ],
     products: [
         .iOSApplication(
@@ -20,8 +20,8 @@ let package = Package(
             teamIdentifier: "Z3RDJSUJKY",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .lightningBolt),
-            accentColor: .presetColor(.red),
+            appIcon: .placeholder(icon: .clock),
+            accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
                 .phone

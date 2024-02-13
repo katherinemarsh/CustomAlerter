@@ -1,23 +1,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var genericAlert: String?
+
     var body: some View {
         AlertPresenter {
             TabView {
-                Group {
-                    Text("Home")
-                        .tabItem {
-                            Label("Home", systemImage: "house")
-                        }
+                Text("Home")
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
 
-                    SettingsView()
-                        .tabItem {
-                            Label("Settings", systemImage: "gear")
-                        }
-                }
-                .toolbarBackground(.white, for: .tabBar)
-                .toolbarBackground(.visible, for: .tabBar)
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
             }
         }
     }
@@ -40,7 +36,7 @@ struct SettingsView: View {
                 }
 
                 Button("Tap to Alert") {
-                    alert = .genericWithRetry { }
+                    alert = .generic
                 }
 
                 Spacer()

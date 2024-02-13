@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-/// Modifier that allows any view wrapped within a top-level AlertPresenter wrapper to present an alert
-/// Binds to an alert set from the view and listens for updates
 private struct CustomAlertModifier: ViewModifier {
     @Environment(\.presentedAlert) private var presentedAlert
 
@@ -16,11 +14,11 @@ private struct CustomAlertModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: alert) {
+            .onChange(of: alert) { _ in
                 presentedAlert.wrappedValue = alert
             }
-            .onChange(of: presentedAlert.wrappedValue) { oldValue, newValue in
-                if newValue == nil && alert == oldValue {
+            .onChange(of: presentedAlert.wrappedValue) { newValue in
+                if newValue == nil {
                     alert = nil
                 }
             }
@@ -36,8 +34,6 @@ extension View {
     func customAlert(
         _ alert: Binding<CustomAlert?>
     ) -> some View {
-        modifier(
-            CustomAlertModifier(alert: alert)
-        )
+        modifier(CustomAlertModifier(alert: alert))
     }
 }
